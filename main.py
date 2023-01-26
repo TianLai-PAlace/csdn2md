@@ -1,17 +1,8 @@
-#############################
-# CopyRight ~~~~~~
-# Author: axzml
-# Date: 2020-03-07
-#############################
 import os
-import sys
 import shutil
 from os.path import join, exists
-import urllib.request
-import requests
 import httpx
 import argparse
-import glob
 from bs4 import BeautifulSoup, NavigableString
 from utils import Parser
 
@@ -136,7 +127,7 @@ def download_csdn_single_page(details_url, md_dir, with_title=True, pdf_dir='pdf
     if not exists(md_dir):
         os.makedirs(md_dir)
     response = httpx.get(details_url)
-    soup = BeautifulSoup(response.content, 'html.parser', from_encoding="utf-8")
+    soup = BeautifulSoup(response.content, 'html.parser', from_encoding="gbk")
     title = soup.find_all('h1', {'class': 'title-article'})[0].string  ## 使用 html 的 title 作为 md 文件名
     title = '_'.join(title.replace('*', '').strip().split())
     md_file = join(md_dir, title + '.md')
@@ -176,7 +167,7 @@ if __name__ == '__main__':
 
     if args.combine_together:
         source_files = join(args.markdown_dir, '*.md')
-        md_file = 'my_together_file.md'  ## 当我清醒过来之后才发现取了一个这样的名字
+        md_file = 'together_file.md'  
         md_dir= join(args.markdown_dir,md_file)
         os.system('type {} > {}'.format(source_files, md_dir))
         if args.to_pdf:
