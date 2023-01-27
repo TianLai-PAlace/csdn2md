@@ -1,10 +1,16 @@
+# coding=utf-8
 import os
 import shutil
+import sys
+import io
 from os.path import join, exists
 import httpx
 import argparse
 from bs4 import BeautifulSoup, NavigableString
 from utils import Parser
+
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8') #改变标准输出的默认编码
 
 parser = argparse.ArgumentParser('CSDN Blog Exporter: To Markdown or To PDF')
 group = parser.add_mutually_exclusive_group()
@@ -32,6 +38,10 @@ parser.add_argument('--combine_together', action='store_true',
                    ' And if to_pdf, the single file will be converted pdf format')
 args = parser.parse_args()
 
+def remove_upprintable_chars(s):
+    """移除所有不可见字符"""
+    return ''.join(x for x in s if x!='\u200b')
+
 def html2md(url, md_file, with_title=False):
     response = httpx.get(url)
     soup = BeautifulSoup(response.content, 'html.parser', from_encoding="utf-8")
@@ -46,7 +56,17 @@ def html2md(url, md_file, with_title=False):
 
     parser = Parser(html)
     with open(md_file, 'w') as f:
-        f.write('{}\n'.format(''.join(parser.outputs)))
+        try:
+            b=[]
+            for item in parser.outputs:
+                item = item.replace('\u200b','')
+                item = item.replace('\xb2','')
+                b.append(item)
+            parser.outputs=b
+            f.write('{}\n'.format(''.join(parser.outputs)))
+        except Exception as e:
+            print(e)
+            
 
 def generate_pdf(input_md_file, pdf_dir):
     if not exists(pdf_dir):
@@ -96,7 +116,7 @@ def download_csdn_category_url(category_url, md_dir, start_page=1, page_num=1000
             category_url_new = category_url.rstrip('.html') + suffix
             print('Getting Response From {}'.format(category_url_new))
             response = httpx.get(category_url_new)
-            soup = BeautifulSoup(response.content, 'html.parser', from_encoding="gbk")
+            soup = BeautifulSoup(response.content, 'html.parser', from_encoding="utf-8")
             article_list = soup.find_all('ul', {'class': 'column_article_list'})[0]
             p = article_list.find_all('p')
             if p and p[0].string == '空空如也':
@@ -127,7 +147,7 @@ def download_csdn_single_page(details_url, md_dir, with_title=True, pdf_dir='pdf
     if not exists(md_dir):
         os.makedirs(md_dir)
     response = httpx.get(details_url)
-    soup = BeautifulSoup(response.content, 'html.parser', from_encoding="gbk")
+    soup = BeautifulSoup(response.content, 'html.parser', from_encoding="utf-8")
     title = soup.find_all('h1', {'class': 'title-article'})[0].string  ## 使用 html 的 title 作为 md 文件名
     title = '_'.join(title.replace('*', '').strip().split())
     md_file = join(md_dir, title + '.md')

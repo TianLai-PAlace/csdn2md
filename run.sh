@@ -59,5 +59,6 @@ if (($continue_flag == 1));then
         exit 0
     fi
 fi
-#echo "下载目录为 ${markdown_dir} \n"
-explorer ${markdown_dir}
+echo "下载目录为 .\ ${markdown_dir}"
+read -p "按任意键结束" xer
+#explorer ${markdown_dir}
