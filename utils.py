@@ -59,6 +59,7 @@ class Parser(object):
                 self.pre = True
             elif tag in ['code', 'tt']:
                 if self.pre:
+                    language = ''
                     if not 'class' in soup.attrs:
                         language = 'bash'  # default language
                     else:

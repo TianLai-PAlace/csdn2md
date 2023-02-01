@@ -61,6 +61,10 @@ def html2md(url, md_file, with_title=False):
             for item in parser.outputs:
                 item = item.replace('\u200b','')
                 item = item.replace('\xb2','')
+                item = item.replace('\u2714',' ')
+                item = item.replace('\ufe0f','')
+                item = item.replace('\U0001f37f','')
+                item = item.replace('\U0001f388','')
                 b.append(item)
             parser.outputs=b
             f.write('{}\n'.format(''.join(parser.outputs)))
