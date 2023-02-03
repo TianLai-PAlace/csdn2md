@@ -1,8 +1,3 @@
-#############################
-# CopyRight ~~~~~~
-# Author: axzml
-# Date: 2020-03-07
-#############################
 from bs4 import BeautifulSoup, Tag, NavigableString, Comment
 import os
 from os.path import join, exists

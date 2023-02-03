@@ -33,14 +33,10 @@ parser.add_argument('--with_title', action='store_true')
 parser.add_argument('--to_pdf', action='store_true')
 parser.add_argument('--rm_cache', action='store_true',
                    help='remove cached file')
-parser.add_argument('--combine_together', action='store_true',
+parser.add_argument('--combine_together',action='store_true',
                    help='Combine all markdown file in markdown_dir to a single file.'
                    ' And if to_pdf, the single file will be converted pdf format')
 args = parser.parse_args()
-
-def remove_upprintable_chars(s):
-    """移除所有不可见字符"""
-    return ''.join(x for x in s if x!='\u200b')
 
 def html2md(url, md_file, with_title=False):
     response = httpx.get(url)
@@ -55,7 +51,7 @@ def html2md(url, md_file, with_title=False):
         html += str(c)
 
     parser = Parser(html)
-    with open(md_file, 'w') as f:
+    with open(md_file, 'w',encoding='utf-8') as f:
         try:
             b=[]
             for item in parser.outputs:
@@ -147,7 +143,7 @@ def download_csdn_category_url(category_url, md_dir, start_page=1, page_num=1000
             print(e)
 
 
-def download_csdn_single_page(details_url, md_dir, with_title=True, pdf_dir='pdf', to_pdf=False):
+def download_csdn_single_page(details_url, md_dir, with_title=True, pdf_dir='pdf', to_pdf=0):
     if not exists(md_dir):
         os.makedirs(md_dir)
     response = httpx.get(details_url)

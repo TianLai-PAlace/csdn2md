@@ -1,9 +1,4 @@
 #!/bin/bash
-#############################
-# CopyRight ~~~~~~
-# Author: axzml
-# Date: 2020-03-07
-#############################
 
 read -p "1:下载专栏全部文章 2:下载单独文章:  " download_category
 
@@ -14,8 +9,8 @@ elif (($download_category == 2)); then
     echo "you have selectd 单独文章下载"
     read -p "输入url:  " article_url
 else
-    echo "请输入 1 或 2"
-    read -p "按任意键结束" xer
+    echo "请输入 1 或 2,按任意键结束"
+    read -n 1
     exit 0
 fi
 
@@ -32,6 +27,8 @@ if (($continue_flag == 1));then
     markdown_dir='markdown'
     figure_dir = 'markdown/figures'
     pdf_dir='pdf'
+    combine_together = 0
+    to_pdf = 0
 
     if (($download_category == 1)); then
         python -u main.py \
@@ -40,8 +37,8 @@ if (($continue_flag == 1));then
             --page_num ${page_num} \
             --markdown_dir ${markdown_dir} \
             --pdf_dir ${pdf_dir} \
-            --combine_together \
-            --to_pdf \
+            #--combine_together $combine_together\
+            #--to_pdf $to_pdf\
             #--with_title \
             #--rm_cache \ ## dangerous option, remove all caches
     elif (($download_category == 2)); then
@@ -49,16 +46,19 @@ if (($continue_flag == 1));then
             --article_url ${article_url} \
             --markdown_dir ${markdown_dir} \
             --pdf_dir ${pdf_dir} \
-            --to_pdf \
+            #--to_pdf $to_pdf\
             #--with_title \
             #--rm_cache \ ## dangerous option, remove all caches
             #--combine_together \
     else
         echo "请输入 1 或 0"
-        read -p "按任意键结束" xer
+        echo 按任意键结束
+        read -n 1
         exit 0
     fi
 fi
 echo "下载目录为 .\ ${markdown_dir}"
-read -p "按任意键结束" xer
+echo 按任意键结束
+read -n 1
+exit 0
 #explorer ${markdown_dir}
