@@ -7,24 +7,20 @@ language:[CN](###CN)/ [EN](###EN)
 
 **目前该版本仅为Windows提供**
 
-将CSDN的博客导出为Typora格式的markdown文件，它支持单篇或整个专栏所有文章的导出操作，并且可以将本次所有导出内容汇总在一起变成一篇文章。
+该仓库提供了一个shell脚本文件，可以将CSDN的博客导出为Typora格式的markdown文件。它支持单篇或整个专栏所有文章的导出操作，并且可以将本次所有导出内容汇总在一起变成一篇文章。
 
 为了更方便使用，shell脚本文件拥有基本的交互，可以进行转换模式选择，文章url输入等操作。
 
-support files中有aria的配置文件和pandoc的配置文件，您还需要下载安装git
+support files中有aria的配置文件和pandoc的配置文件，您还需要下载安装git。
 
-在对aria配置好，pandoc以及git安装好后
-
-windows环境下双击run.sh即可使用，建议使用管理员模式。
-
-也可以在该文件目录的cmd窗口输入 sh run.sh 使用
+在对aria配置好，pandoc以及git安装好后，windows环境下双击run.sh即可使用，建议使用管理员模式。也可以在该文件目录的cmd窗口输入 sh run.sh 使用。
 
 有需要注意的地方：
 
-1.  两个python文件里import的库都要安装
-2.  使用aria2来下载文章图片，本库里自带一个，解压后可以查看使用方法
-3.  typora需要开启内联公式
-4.  该转换仅针对typora格式，其他markdown编辑器可能会加载错误
+- 两个python文件里import的库都要安装。
+- 使用aria2来下载文章图片，本库里自带一个，解压后可以查看使用方法。
+- typora需要开启内联公式。
+- 该转换仅针对typora格式，其他markdown编辑器可能会加载错误。
 
 ### EN
 
