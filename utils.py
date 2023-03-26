@@ -62,7 +62,7 @@ class Parser(object):
                             if name in ' '.join(list(soup.attrs['class'])): # <code class="prism language-cpp">
                                 language = name
                     soup.contents.insert(0, NavigableString('\n```{}\n'.format(language)))
-                    soup.contents.append(NavigableString('```\n'))
+                    soup.contents.append(NavigableString('\n```\n'))
                     self.pre = False  # assume the contents of <pre> contain only one <code>
                 else:
                     soup.contents.insert(0, NavigableString('`'))

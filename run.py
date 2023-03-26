@@ -3,10 +3,9 @@ import tkinter as tk
 import os
 
 def start_button():
-    import tkinter.messagebox as messagebox
-    messagebox.showinfo(title='提示', message='正在下载中，请稍后')   
-    
+   
     url = url_entry.get()
+    url = url.split('?')[0]
     mode = mode_option.get()
     category_url = url
     article_url= url
@@ -17,6 +16,7 @@ def start_button():
     pdf_dir='pdf'
     combine_together = 0
     to_pdf = 0
+    
 
     if mode == "下载整个库的文章":
         os.system(f"python -u ./main.py --category_url {category_url} --start_page {start_page} --page_num {page_num} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir}")
