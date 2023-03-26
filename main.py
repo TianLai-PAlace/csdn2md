@@ -157,6 +157,9 @@ def download_csdn_single_page(details_url, md_dir, with_title=True, pdf_dir='pdf
 
 
 if __name__ == '__main__':
+    # 获取当前文件的路径
+    current_path = os.path.dirname(os.path.abspath(__file__))
+    
 
     if not args.category_url and not args.article_url:
         raise Exception('Option category_url or article_url is not specified!')
@@ -164,8 +167,8 @@ if __name__ == '__main__':
     if exists(args.markdown_dir) and args.rm_cache:
         shutil.rmtree(args.markdown_dir)
 
-    if exists('./markdown/figures') and args.rm_cache:
-        shutil.rmtree('./markdown/figures')
+    if exists(current_path+'/markdown/figures') and args.rm_cache:
+        shutil.rmtree(current_path+'/markdown/figures')
 
     if exists(args.pdf_dir) and args.rm_cache:
         shutil.rmtree(args.pdf_dir)

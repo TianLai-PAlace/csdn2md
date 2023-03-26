@@ -7,9 +7,11 @@ language:[CN](#CN)/ [EN](#EN)
 
 ## 介绍
 
-**目前该版本仅为Windows提供**
+![iShot_2023-03-26_21.00.23](./assets/iShot_2023-03-26_21.00.23.png)
 
 该仓库提供了一个shell脚本文件和一个python tkinter gui，可以将CSDN的博客导出为Typora格式的markdown文件。它支持单篇或整个专栏所有文章的导出操作，并且可以将本次所有导出内容汇总在一起变成一篇文章。
+
+![iShot_2023-03-26_21.02.44](./assets/iShot_2023-03-26_21.02.44-9838730.png)
 
 
 
@@ -35,13 +37,13 @@ pip install -r requirements.txt
 
 如果使用shell，
 
-windows环境下双击`run.sh`即可使用，建议使用管理员模式。
+双击`run.sh`即可使用，建议使用管理员模式。
 
 也可以在该文件目录的cmd窗口输入 `sh run.sh` 使用。
 
 如果使用gui，
 
-windows环境下双击`run.py`即可使用，建议使用管理员模式。
+双击`run.py`即可使用，建议使用管理员模式。
 
 也可以在该文件目录的cmd窗口输入 `python run.py` 使用。
 
@@ -58,5 +60,5 @@ windows环境下双击`run.py`即可使用，建议使用管理员模式。
 
 # EN
 
-**Currently this version is only available for Windows**
+
 

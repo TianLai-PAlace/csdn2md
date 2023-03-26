@@ -13,12 +13,13 @@ class Parser(object):
         self.html = html
         self.soup = BeautifulSoup(html, 'html.parser')
         self.outputs = []
-        self.fig_dir = './markdown/figures'
+        self.current_path = os.path.dirname(os.path.abspath(__file__))
+        self.fig_dir = 'markdown/figures'
         self.relative_fig_dir = './figures'
         self.pre = False
         self.equ_inline = False
 
-        if not exists(self.fig_dir):
+        if not exists('./'+self.fig_dir):
             os.makedirs(self.fig_dir)
         self.recursive(self.soup)
 
@@ -104,7 +105,7 @@ class Parser(object):
                 # img_file = re.findall(pattern, src)[0][0].split('/')[-1].rstrip('?') ## e.g. https://img-blog.csdnimg.cn/20200228210146931.png?
                 relative_img_file = join(self.relative_fig_dir, img_file)
                 img_file = join(self.fig_dir, img_file)
-                download_img_cmd = 'aria2c --file-allocation=none -c -x 10 -s 10 -o {} {}'.format(img_file, src)
+                download_img_cmd = 'aria2c --file-allocation=none -c -x 10 -s 10 -o {} {}'.format(img_file, src) # q:这段代码中aria2c的各个选项的作用是什么？
                 if not exists(img_file):
                     os.system(download_img_cmd)
                 # soup.attrs['src'] = img_file

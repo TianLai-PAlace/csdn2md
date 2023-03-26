@@ -40,9 +40,7 @@ file declaration:
 
 ## pandoc
 
-just unzip [pandoc-2.18-windows-x86_64.zip](pandoc-2.18-windows-x86_64.zip) and setup the msi file on your windows.
-
-Or you can download new pandoc from the network
+go to [this web page](https://pandoc.org/installing.html), download the sufficient pandoc install pack and install it
 
 
 

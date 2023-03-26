@@ -5,14 +5,17 @@ import os
 def start_button():
    
     url = url_entry.get()
-    url = url.split('?')[0]
+    if '?' in url:
+        url = url.split('?')[0]
+    
+    current_path = os.path.dirname(os.path.abspath(__file__))
     mode = mode_option.get()
     category_url = url
     article_url= url
     start_page=1
     page_num=100
-    markdown_dir='markdown'
-    figure_dir = 'markdown/figures'
+    markdown_dir=current_path+'/markdown'
+    figure_dir = current_path+'/markdown/figures'
     pdf_dir='pdf'
     combine_together = 0
     to_pdf = 0
@@ -22,6 +25,7 @@ def start_button():
         os.system(f"python -u ./main.py --category_url {category_url} --start_page {start_page} --page_num {page_num} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir}")
     elif mode == "下载单篇文章":
         os.system(f"python -u ./main.py --article_url {article_url} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir} ")
+
 
         
 root = tk.Tk() 
