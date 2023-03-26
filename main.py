@@ -9,7 +9,6 @@ import argparse
 from bs4 import BeautifulSoup, NavigableString
 from utils import Parser
 
-
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8') #改变标准输出的默认编码
 
 parser = argparse.ArgumentParser('CSDN Blog Exporter: To Markdown or To PDF')
