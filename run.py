@@ -19,12 +19,18 @@ def start_button():
     pdf_dir='pdf'
     combine_together = 0
     to_pdf = 0
-    
+    abspath=os.path.abspath('.')
 
-    if mode == "下载整个库的文章":
-        os.system(f"python -u ./main.py --category_url {category_url} --start_page {start_page} --page_num {page_num} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir}")
-    elif mode == "下载单篇文章":
-        os.system(f"python -u ./main.py --article_url {article_url} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir} ")
+    if mode == "csdn-下载整个库的文章":
+        os.system(f"python -u {abspath}/main.py --category_url {category_url} --start_page {start_page} --page_num {page_num} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir}")
+    elif mode == "csdn-下载单篇文章":
+        os.system(f"python -u {abspath}/main.py --article_url {article_url} --markdown_dir {markdown_dir} --pdf_dir {pdf_dir} ")
+    elif mode == "zhihu-专栏":
+        os.system(f"python -u {abspath}/zhihu/zhihu_zhuanlan.py -l {article_url}")
+    elif mode == "zhihu-问答":
+        os.system(f"python -u {abspath}/zhihu/zhihu_answer.py -l {article_url}")
+    elif mode == "zhihu-收藏夹":
+        os.system(f"python -u {abspath}/zhihu/zhihu_collection.py -l {article_url}")
 
 
         
@@ -41,8 +47,8 @@ url_entry.pack(side=tk.LEFT)
 mode_label = tk.Label(root, text="请选择模式: ") 
 mode_label.pack(side=tk.LEFT) 
 mode_option = tk.StringVar() 
-mode_option.set("下载单篇文章") 
-mode_menu = tk.OptionMenu(root, mode_option, "下载单篇文章", "下载整个库的文章") 
+mode_option.set("csdn-下载单篇文章") 
+mode_menu = tk.OptionMenu(root, mode_option, "csdn-下载单篇文章", "csdn-下载整个库的文章","zhihu-专栏","zhihu-问答","zhihu-收藏夹") 
 mode_menu.pack(side=tk.LEFT)
 
 #开始按钮 
